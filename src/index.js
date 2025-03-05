@@ -1,2 +1,2 @@
-import SearchableSelect from "./SearchableSelect";
+import SearchableSelect from "./SearchableSelect.jsx";
 export default SearchableSelect;
