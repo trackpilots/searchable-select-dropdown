@@ -7,8 +7,9 @@ const SearchableSelect = ({
   onChange,
   searchPlaceholder = "Search...",
   selectAllLabel = "All Members",
-  accentColor = "#9D55FF", // Default color
+  checkboxColor = "#9D55FF", // Default color
   checkboxSize = 16, // Default checkbox size
+  width = "18rem", // Default width (equivalent to w-72 in Tailwind)
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -43,7 +44,7 @@ const SearchableSelect = ({
   }, []);
 
   return (
-    <div className="relative w-72" ref={dropdownRef}>
+    <div className="relative" style={{ width }} ref={dropdownRef}>
       <div
         className="border-2 rounded-full text-gray-600 py-2 px-6 flex items-center gap-2 justify-between bg-white cursor-pointer"
         onClick={toggleDropdown}
@@ -73,11 +74,11 @@ const SearchableSelect = ({
             <input
               type="checkbox"
               className="mr-2"
-              style={{ width: checkboxSize, height: checkboxSize, accentColor }}
+              style={{ width: checkboxSize, height: checkboxSize, checkboxColor }}
               checked={selectedOptions.length === options.length}
               onChange={handleSelectAll}
             />
-            <label className="cursor-pointer" onClick={handleSelectAll} style={{ color: accentColor }}>
+            <label className="cursor-pointer" onClick={handleSelectAll}>
               {selectAllLabel}
             </label>
           </div>
@@ -90,11 +91,11 @@ const SearchableSelect = ({
                   <input
                     type="checkbox"
                     className="mr-2"
-                    style={{ width: checkboxSize, height: checkboxSize, accentColor }}
+                    style={{ width: checkboxSize, height: checkboxSize, checkboxColor }}
                     checked={selectedOptions.includes(option)}
                     onChange={() => handleSelect(option)}
                   />
-                  <span style={{ color: accentColor }}>{option}</span>
+                  <span>{option}</span>
                 </label>
               ))}
           </div>
