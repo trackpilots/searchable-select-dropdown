@@ -13,7 +13,7 @@ A **searchable, multi-select dropdown** component built with **React** and **Tai
 - 📱 Fully responsive  
 - ⚡ Easy to integrate  
 
-![Screenshot](assets/screenshot.png)
+![Screenshot](assets/screenshots.png)
 ---
 
 
