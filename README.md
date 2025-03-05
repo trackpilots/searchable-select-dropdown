@@ -56,8 +56,9 @@ const App = () => {
         options={options} 
         selectedOptions={selected} 
         onChange={setSelected} 
-        placeholder="Search & Select" 
-        accentColor="#9D55FF" 
+        searchPlaceholder="Search...",
+        placeholder="Search..." 
+        checkboxColor="#9D55FF" 
         checkboxSize="20px" 
       />
       <p className="mt-4">Selected: {selected.join(", ")}</p>
@@ -76,7 +77,8 @@ export default App;
 | `selectedOptions` | `array`  | `[]`            | Selected options state. |
 | `onChange`      | `function` | `() => {}`     | Callback function when selection changes. |
 | `placeholder`    | `string`  | `"Search..."`   | Placeholder text. |
-| `accentColor`   | `string`  | `"#9D55FF"`     | Custom accent color. |
+| `searchPlaceholder` | `string` | `"Search..."`   | Searxh placeholder text. |
+| `checkboxColor`   | `string`  | `"#9D55FF"`     | Custom checkbox color. |
 | `checkboxSize`  | `string`  | `"16px"`        | Custom checkbox size (height/width). |
 
 ## 📌 Maintainers
