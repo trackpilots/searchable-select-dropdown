@@ -47,15 +47,20 @@ import React, { useState } from "react";
 import SearchableSelect from "@trackpilots/searchable-select-dropdown";
 
 const App = () => {
-  const options = ["Apple", "Banana", "Cherry", "Mango", "Pineapple"];
-  const [selected, setSelected] = useState([]);
+  const options = ["Mahendran Sakthi", "Jagatheesan Madheswarn", "Jefin Rojar Jeyakumar", "Sanjay Sankar", "Jagadeesh Elango"];
+  const [selectedValues, setSelectedValues] = useState([]);
+
+  const handleSelectionChange = (values) => {
+    console.log("Selected values:", values);
+    setSelectedValues(values);
+  };
 
   return (
     <div className="p-4">
       <SearchableSelect 
         options={options} 
-        selectedOptions={selected} 
-        onChange={setSelected} 
+        selectedOptions={selectedValues} 
+        onChange={handleSelectionChange} 
         searchPlaceholder="Search...",
         placeholder="Search..." 
         checkboxColor="#9D55FF" 
@@ -77,7 +82,7 @@ export default App;
 | `selectedOptions` | `array`  | `[]`            | Selected options state. |
 | `onChange`      | `function` | `() => {}`     | Callback function when selection changes. |
 | `placeholder`    | `string`  | `"Search..."`   | Placeholder text. |
-| `searchPlaceholder` | `string` | `"Search..."`   | Searxh placeholder text. |
+| `searchPlaceholder` | `string` | `"Search..."`   | Search placeholder text. |
 | `checkboxColor`   | `string`  | `"#9D55FF"`     | Custom checkbox color. |
 | `checkboxSize`  | `string`  | `"16px"`        | Custom checkbox size (height/width). |
 
