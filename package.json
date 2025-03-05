@@ -1,6 +1,6 @@
 {
   "name": "@trackpilots/searchable-select-dropdown",
-  "version": "1.0.18",
+  "version": "1.0.21",
   "description": "A customizable, searchable select dropdown for React with Tailwind CSS support. Perfect for filtering large datasets efficiently.",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/trackpilots/searchable-select-dropdown.git"
   },
-  "homepage": "https://trackpilots.com",
+  "homepage": "https://quickappstudio.com",
   "bugs": {
     "url": "https://github.com/trackpilots/searchable-select-dropdown/issues"
   },
@@ -43,8 +43,8 @@
     "tailwindcss": "^3.0.0"
   },
   "devDependencies": {
-    "webpack": "^5.0.0",
     "babel-loader": "^8.0.0",
-    "jest": "^29.0.0"
+    "jest": "^29.0.0",
+    "webpack": "^5.0.0"
   }
 }

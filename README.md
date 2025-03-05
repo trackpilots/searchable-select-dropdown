@@ -76,6 +76,8 @@ export default App;
 | `accentColor`   | `string`  | `"#9D55FF"`     | Custom accent color. |
 | `checkboxSize`  | `string`  | `"16px"`        | Custom checkbox size (height/width). |
 
+## 📌 Maintainers
+These packages are maintained by [**Quick App Studio**](https://quickappstudio.com) Developers.
 
 ##  📄 License
 This project is licensed under the MIT License.
