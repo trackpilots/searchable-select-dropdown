@@ -1,2 +1,2 @@
-import SearchableSelect from "./SearchableSelect.jsx";
-export default SearchableSelect;
+import TrackpilotsSearchSelectDropdown from "./TrackpilotsSearchSelectDropdown.jsx";
+export default TrackpilotsSearchSelectDropdown;

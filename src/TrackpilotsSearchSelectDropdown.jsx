@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { IoSearch } from "react-icons/io5";
 
-const SearchableSelect = ({
+const TrackpilotsSearchSelectDropdown = ({
   options = [],
   placeholder = "Search by ...",
   onChange,
@@ -134,4 +134,4 @@ const SearchableSelect = ({
   );
 };
 
-export default SearchableSelect;
+export default TrackpilotsSearchSelectDropdown;
