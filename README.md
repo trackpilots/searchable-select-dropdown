@@ -87,7 +87,7 @@ export default App;
 | `checkboxSize`  | `string`  | `"16px"`        | Custom checkbox size (height/width). |
 
 ## 📌 Maintainers
-These packages are maintained by [**Quick App Studio**](https://quickappstudio.com) Developers.
+These packages are maintained by [**Quick App Studio**](https://quickappstudio.com/our-team) Developers.
 
 ##  📄 License
 This project is licensed under the MIT License.
