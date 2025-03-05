@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { IoSearchCircleOutline } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
 
 const SearchableSelect = ({
   options = [],
@@ -59,7 +59,7 @@ const SearchableSelect = ({
         onClick={toggleDropdown}
       >
         <div className="flex items-center gap-2">
-          <IoSearchCircleOutline className="w-5 h-5 text-gray-500" />
+          <IoSearch className="w-5 h-5 text-gray-500" />
           <span className="truncate text-sm">
             {selectedOptions.length > 0
               ? `${selectedOptions[0]}${

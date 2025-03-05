@@ -13,7 +13,10 @@ A **searchable, multi-select dropdown** component built with **React** and **Tai
 - 📱 Fully responsive  
 - ⚡ Easy to integrate  
 
+![Screenshot](assets/screenshot.jpg)
 ---
+
+
 
 ## 🚀 Installation  
 You can install the package using **npm** or **yarn**:  
