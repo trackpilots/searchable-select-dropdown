@@ -17,12 +17,15 @@ const TrackpilotsSearchSelectDropdown = ({
   const dropdownRef = useRef(null);
   const selectAllRef = useRef(null);
 
+  // Create a dynamic ref for each instance
+  const dynamicRef = useRef({});
+
   useEffect(() => {
-    if (selectAllRef.current) {
-      selectAllRef.current.indeterminate =
+    if (dynamicRef.current && dynamicRef.current[placeholder]) {
+      dynamicRef.current[placeholder].indeterminate =
         selectedOptions.length > 0 && selectedOptions.length < options.length;
     }
-  }, [selectedOptions]);
+  }, [selectedOptions, placeholder]);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -87,7 +90,7 @@ const TrackpilotsSearchSelectDropdown = ({
             <div className="p-2 border-b border-gray-300 flex items-center">
               <input
                 type="checkbox"
-                ref={selectAllRef}
+                ref={(el) => (dynamicRef.current[placeholder] = el)}
                 className={`mr-2 accent-[${checkboxColor}]`}
                 style={{ width: checkboxSize, height: checkboxSize }}
                 checked={selectedOptions.length === options.length}
