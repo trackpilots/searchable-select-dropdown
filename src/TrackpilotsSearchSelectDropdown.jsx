@@ -2,33 +2,28 @@ import React, { useState, useEffect, useRef } from "react";
 import { IoSearch } from "react-icons/io5";
 
 const TrackpilotsSearchSelectDropdown = ({
-  options = [], // Expecting options as [{ key: "1", value: "Alice" }, { key: "2", value: "Bob" }]
+  options = [],
   placeholder = "Search by ...",
   searchPlaceholder = "Search...",
-  selectAllLabel = "Select All",
+  selectAllLabel = "Select All", // ✅ Added default value
   checkboxColor = "#9D55FF",
   checkboxSize = 16,
   width = "18rem",
-  defaultSelectedOptions = [], // Default selected options should be an array of keys
-  onChange, // Callback function that returns selected key-value pairs
+  onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedKeys, setSelectedKeys] = useState(defaultSelectedOptions);
+  const [selectedKeys, setSelectedKeys] = useState([]); // Removed defaultSelectedOptions
   const dropdownRef = useRef(null);
   const dynamicRef = useRef({});
 
-  // 🔹 Sync selectedKeys when defaultSelectedOptions changes
+  // 🔹 Handle indeterminate state for "Select All" checkbox
   useEffect(() => {
-    setSelectedKeys(defaultSelectedOptions);
-  }, [defaultSelectedOptions]);
-
-  useEffect(() => {
-    if (dynamicRef.current && dynamicRef.current[placeholder]) {
-      dynamicRef.current[placeholder].indeterminate =
-        selectedKeys.length > 0 && selectedKeys.length < options.length;
+    if (dynamicRef.current?.[placeholder]) {
+      const isIndeterminate = selectedKeys.length > 0 && selectedKeys.length < options.length;
+      dynamicRef.current[placeholder].indeterminate = isIndeterminate;
     }
-  }, [selectedKeys, placeholder]);
+  }, [selectedKeys, options.length]);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -38,20 +33,13 @@ const TrackpilotsSearchSelectDropdown = ({
       : [...selectedKeys, key];
 
     setSelectedKeys(updatedSelection);
-
-    if (onChange) {
-      onChange(options.filter((opt) => updatedSelection.includes(opt.key))); // Return key-value pairs
-    }
+    if (onChange) onChange(options.filter((opt) => updatedSelection.includes(opt.key)));
   };
 
   const handleSelectAll = () => {
-    const updatedSelection =
-      selectedKeys.length === options.length ? [] : options.map((opt) => opt.key);
+    const updatedSelection = selectedKeys.length === options.length ? [] : options.map((opt) => opt.key);
     setSelectedKeys(updatedSelection);
-
-    if (onChange) {
-      onChange(options.filter((opt) => updatedSelection.includes(opt.key))); // Return key-value pairs
-    }
+    if (onChange) onChange(options.filter((opt) => updatedSelection.includes(opt.key)));
   };
 
   useEffect(() => {
