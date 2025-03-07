@@ -14,9 +14,14 @@ const TrackpilotsSearchSelectDropdown = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOptions, setSelectedOptions] = useState(defaultSelectedOptions); // 🔹 Set initial state
+  const [selectedOptions, setSelectedOptions] = useState(defaultSelectedOptions); // 🔹 Initial state
   const dropdownRef = useRef(null);
   const dynamicRef = useRef({});
+
+  // 🔹 Sync selectedOptions when defaultSelectedOptions changes
+  useEffect(() => {
+    setSelectedOptions(defaultSelectedOptions);
+  }, [defaultSelectedOptions]);
 
   useEffect(() => {
     if (dynamicRef.current && dynamicRef.current[placeholder]) {
