@@ -38,7 +38,9 @@
     "start": "webpack serve --mode=development",
     "test": "jest",
     "lint": "eslint src --fix",
-    "publish": "npm version patch && npm publish --access public"
+    "patch": "npm version patch",
+    "publish" :"npm publish --access public"
+  
   },
   "dependencies": {
     "react": "^18.0.0",
