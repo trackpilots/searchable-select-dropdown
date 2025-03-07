@@ -2,50 +2,56 @@ import React, { useState, useEffect, useRef } from "react";
 import { IoSearch } from "react-icons/io5";
 
 const TrackpilotsSearchSelectDropdown = ({
-  options = [],
+  options = [], // Expecting options as [{ key: "1", value: "Alice" }, { key: "2", value: "Bob" }]
   placeholder = "Search by ...",
   searchPlaceholder = "Search...",
   selectAllLabel = "Select All",
   checkboxColor = "#9D55FF",
   checkboxSize = 16,
   width = "18rem",
-  defaultSelectedOptions = [], // 🔹 Default selected options on first render
-  onChange, // 🔹 Callback function for selection updates
+  defaultSelectedOptions = [], // Default selected options should be an array of keys
+  onChange, // Callback function that returns selected key-value pairs
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOptions, setSelectedOptions] = useState(defaultSelectedOptions); // 🔹 Initial state
+  const [selectedKeys, setSelectedKeys] = useState(defaultSelectedOptions);
   const dropdownRef = useRef(null);
   const dynamicRef = useRef({});
 
-  // 🔹 Sync selectedOptions when defaultSelectedOptions changes
+  // 🔹 Sync selectedKeys when defaultSelectedOptions changes
   useEffect(() => {
-    setSelectedOptions(defaultSelectedOptions);
+    setSelectedKeys(defaultSelectedOptions);
   }, [defaultSelectedOptions]);
 
   useEffect(() => {
     if (dynamicRef.current && dynamicRef.current[placeholder]) {
       dynamicRef.current[placeholder].indeterminate =
-        selectedOptions.length > 0 && selectedOptions.length < options.length;
+        selectedKeys.length > 0 && selectedKeys.length < options.length;
     }
-  }, [selectedOptions, placeholder]);
+  }, [selectedKeys, placeholder]);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleSelect = (option) => {
-    const updatedSelection = selectedOptions.includes(option)
-      ? selectedOptions.filter((item) => item !== option)
-      : [...selectedOptions, option];
+  const handleSelect = (key) => {
+    const updatedSelection = selectedKeys.includes(key)
+      ? selectedKeys.filter((item) => item !== key)
+      : [...selectedKeys, key];
 
-    setSelectedOptions(updatedSelection);
-    if (onChange) onChange(updatedSelection); // 🔹 Update Parent State
+    setSelectedKeys(updatedSelection);
+
+    if (onChange) {
+      onChange(options.filter((opt) => updatedSelection.includes(opt.key))); // Return key-value pairs
+    }
   };
 
   const handleSelectAll = () => {
     const updatedSelection =
-      selectedOptions.length === options.length ? [] : options;
-    setSelectedOptions(updatedSelection);
-    if (onChange) onChange(updatedSelection); // 🔹 Update Parent State
+      selectedKeys.length === options.length ? [] : options.map((opt) => opt.key);
+    setSelectedKeys(updatedSelection);
+
+    if (onChange) {
+      onChange(options.filter((opt) => updatedSelection.includes(opt.key))); // Return key-value pairs
+    }
   };
 
   useEffect(() => {
@@ -67,11 +73,9 @@ const TrackpilotsSearchSelectDropdown = ({
         <div className="flex items-center gap-2">
           <IoSearch className="w-5 h-5 text-gray-500" />
           <span className="truncate text-sm">
-            {selectedOptions.length > 0
-              ? `${selectedOptions[0]}${
-                  selectedOptions.length > 1
-                    ? ` + ${selectedOptions.length - 1}`
-                    : ""
+            {selectedKeys.length > 0
+              ? `${options.find((opt) => opt.key === selectedKeys[0])?.value || ""}${
+                  selectedKeys.length > 1 ? ` + ${selectedKeys.length - 1}` : ""
                 }`
               : placeholder}
           </span>
@@ -96,7 +100,7 @@ const TrackpilotsSearchSelectDropdown = ({
                 ref={(el) => (dynamicRef.current[placeholder] = el)}
                 className={`mr-2 accent-[${checkboxColor}]`}
                 style={{ width: checkboxSize, height: checkboxSize }}
-                checked={selectedOptions.length === options.length}
+                checked={selectedKeys.length === options.length}
                 onChange={handleSelectAll}
               />
               <label className="cursor-pointer" onClick={handleSelectAll}>
@@ -106,30 +110,28 @@ const TrackpilotsSearchSelectDropdown = ({
           )}
 
           <div className="max-h-48 overflow-y-auto">
-            {options.filter((option) =>
-              option.toLowerCase().includes(searchTerm.toLowerCase())
+            {options.filter((opt) =>
+              opt.value.toLowerCase().includes(searchTerm.toLowerCase())
             ).length === 0 ? (
               <div className="p-2 text-gray-500 text-center">
                 No options found
               </div>
             ) : (
               options
-                .filter((option) =>
-                  option.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-                .map((option) => (
+                .filter((opt) => opt.value.toLowerCase().includes(searchTerm.toLowerCase()))
+                .map((opt) => (
                   <label
-                    key={option}
+                    key={opt.key}
                     className="p-2 flex items-center hover:bg-gray-100 cursor-pointer"
                   >
                     <input
                       type="checkbox"
                       className={`mr-2 w-4 h-4 accent-[${checkboxColor}]`}
                       style={{ width: checkboxSize, height: checkboxSize }}
-                      checked={selectedOptions.includes(option)}
-                      onChange={() => handleSelect(option)}
+                      checked={selectedKeys.includes(opt.key)}
+                      onChange={() => handleSelect(opt.key)}
                     />
-                    <span>{option}</span>
+                    <span>{opt.value}</span>
                   </label>
                 ))
             )}
