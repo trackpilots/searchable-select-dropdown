@@ -4,20 +4,18 @@ import { IoSearch } from "react-icons/io5";
 const TrackpilotsSearchSelectDropdown = ({
   options = [],
   placeholder = "Search by ...",
-  onChange,
   searchPlaceholder = "Search...",
   selectAllLabel = "Select All",
-  checkboxColor = "#9D55FF", // Default color
-  checkboxSize = 16, // Default checkbox size
-  width = "18rem", // Default width (equivalent to w-72 in Tailwind)
+  checkboxColor = "#9D55FF",
+  checkboxSize = 16,
+  width = "18rem",
+  defaultSelectedOptions = [], // 🔹 Default selected options on first render
+  onChange, // 🔹 Callback function for selection updates
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState(defaultSelectedOptions); // 🔹 Set initial state
   const dropdownRef = useRef(null);
-  const selectAllRef = useRef(null);
-
-  // Create a dynamic ref for each instance
   const dynamicRef = useRef({});
 
   useEffect(() => {
@@ -35,14 +33,14 @@ const TrackpilotsSearchSelectDropdown = ({
       : [...selectedOptions, option];
 
     setSelectedOptions(updatedSelection);
-    if (onChange) onChange(updatedSelection);
+    if (onChange) onChange(updatedSelection); // 🔹 Update Parent State
   };
 
   const handleSelectAll = () => {
     const updatedSelection =
       selectedOptions.length === options.length ? [] : options;
     setSelectedOptions(updatedSelection);
-    if (onChange) onChange(updatedSelection);
+    if (onChange) onChange(updatedSelection); // 🔹 Update Parent State
   };
 
   useEffect(() => {
