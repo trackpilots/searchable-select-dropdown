@@ -63,7 +63,7 @@ const TrackpilotsSearchSelectDropdown = ({
           <span className="truncate text-sm">
             {selectedKeys.length > 0
               ? `${options.find((opt) => opt.key === selectedKeys[0])?.value || ""}${
-                  selectedKeys.length > 1 ? ` + ${selectedKeys.length - 1}` : ""
+                  selectedKeys.length > 1 ? ` +${selectedKeys.length - 1}` : ""
                 }`
               : placeholder}
           </span>
