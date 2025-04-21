@@ -9,6 +9,7 @@ const TrackpilotsSearchSelectDropdown = ({
   checkboxColor = "#9D55FF",
   checkboxSize = 16,
   width = "18rem",
+  singleSelect = false,
   defaultSelectedOptions = [], // Array of objects [{ label: "Option 1", value: "opt1" }]
   onChange = () => {}, // Default empty function // Function to return array of selected objects
 }) => {
@@ -22,7 +23,7 @@ const TrackpilotsSearchSelectDropdown = ({
     if (defaultSelectedOptions.length > 0) {
       setSelectedOptions(defaultSelectedOptions);
     }
-  }, []);
+  }, [defaultSelectedOptions]);
 
   useEffect(() => {
     if (selectAllRef.current) {
@@ -94,7 +95,7 @@ const TrackpilotsSearchSelectDropdown = ({
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 
-          {options.length > 0 && (
+          {!singleSelect && options.length > 0 && (
             <div className="p-2 border-b border-gray-300 flex items-center">
               <input
                 type="checkbox"
